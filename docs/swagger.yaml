@@ -1,0 +1,66 @@
+basePath: /
+definitions:
+  model.AuthenticationInput:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+host: localhost:8000
+info:
+  contact:
+    name: Lucas Euzebio
+  description: Api do marketPlace.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: MarketPlace
+  version: 1.0.0
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login user
+      parameters:
+      - description: data for registration
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.AuthenticationInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Login user
+      tags:
+      - register
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register new user
+      parameters:
+      - description: data for registration
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.AuthenticationInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Register new User
+      tags:
+      - register
+schemes:
+- http
+swagger: "2.0"

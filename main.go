@@ -10,8 +10,25 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+
+	_ "ecommerce/docs"
+
+	swaggerfile "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// @title MarketPlace
+// @version 1.0.0
+// @description Api do marketPlace.
+
+// @contact.name Lucas Euzebio
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host localhost:8000
+// @BasePath /
+// @schemes http
 func main() {
 	loadEnv()
 	loadDatabase()
@@ -33,6 +50,9 @@ func loadDatabase() {
 
 func serveApplication() {
 	router := gin.Default()
+
+	url := ginSwagger.URL("http://localhost:8000/swagger/doc.json")
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfile.Handler, url))
 
 	publicRoutes := router.Group("/auth")
 	publicRoutes.POST("/register", controller.Register)
